@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EventHub | Admin Login</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="admin-login-page">
+
+    <div class="login-container">
+
+        <div class="login-card">
+
+            <div class="login-logo">
+                Event<span>Hub</span>
+            </div>
+
+            <p class="section-tag">
+                ADMIN PANEL
+            </p>
+
+            <h1>Welcome Back</h1>
+
+            <p class="login-subtitle">
+                Sign in to manage your events.
+            </p>
+
+
+            <form id="loginForm">
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="admin@eventhub.com"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    id="loginButton"
+                    class="register-button"
+                >
+                    Login
+                </button>
+
+            </form>
+
+
+            <p
+                id="loginMessage"
+                class="form-message"
+            ></p>
+
+
+            <a
+                href="/"
+                class="back-home"
+            >
+                ← Back to EventHub
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <script src="admin-login.js"></script>
+
+</body>
+
+</html>

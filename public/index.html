@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>EventHub | Event Registration</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         NAVBAR
+         ========================================== -->
+
+    <header class="navbar">
+
+        <div class="container nav-container">
+
+            <a
+                href="/"
+                class="logo"
+            >
+                Event<span>Hub</span>
+            </a>
+
+
+            <nav class="nav-links">
+
+                <a href="#events">
+                    Events
+                </a>
+
+                <a href="#about">
+                    About
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ==========================================
+         HERO
+         ========================================== -->
+
+    <section class="hero">
+
+        <div class="container hero-content">
+
+            <p class="section-tag">
+                DISCOVER • REGISTER • EXPERIENCE
+            </p>
+
+            <h1>
+                Find Your Next
+                <span>Great Event.</span>
+            </h1>
+
+            <p class="hero-description">
+                Discover exciting events, hackathons,
+                workshops and experiences happening
+                around you.
+            </p>
+
+            <a
+                href="#events"
+                class="register-button"
+            >
+                Explore Events
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         EVENTS
+         ========================================== -->
+
+    <section
+        id="events"
+        class="events-section"
+    >
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <div>
+
+                    <p class="section-tag">
+                        UPCOMING EVENTS
+                    </p>
+
+                    <h2>
+                        Explore Events
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="eventsContainer"
+                class="events-grid"
+            >
+
+                <p class="loading">
+                    Loading events...
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         EVENT DETAILS MODAL
+         ========================================== -->
+
+    <div
+        id="eventDetailsModal"
+        class="modal"
+    >
+
+        <div class="modal-content event-details-modal">
+
+            <button
+                class="close-button"
+                onclick="closeEventDetails()"
+            >
+                &times;
+            </button>
+
+
+            <p class="section-tag">
+                EVENT DETAILS
+            </p>
+
+
+            <h2 id="detailsTitle">
+                Event Title
+            </h2>
+
+
+            <div class="details-list">
+
+                <div class="detail-item">
+
+                    <span>📅</span>
+
+                    <div>
+
+                        <strong>
+                            Date
+                        </strong>
+
+                        <p id="detailsDate">
+                            -
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>📍</span>
+
+                    <div>
+
+                        <strong>
+                            Location
+                        </strong>
+
+                        <p id="detailsLocation">
+                            -
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>👥</span>
+
+                    <div>
+
+                        <strong>
+                            Capacity
+                        </strong>
+
+                        <p id="detailsCapacity">
+                            -
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="event-description-box">
+
+                <h3>
+                    About this event
+                </h3>
+
+                <p id="detailsDescription">
+                    -
+                </p>
+
+            </div>
+
+
+            <div class="explore-box">
+
+                <h3>
+                    What you can explore
+                </h3>
+
+                <ul>
+
+                    <li>
+                        Meet and connect with participants
+                    </li>
+
+                    <li>
+                        Learn new skills and ideas
+                    </li>
+
+                    <li>
+                        Participate in exciting activities
+                    </li>
+
+                    <li>
+                        Build your network
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <button
+                id="detailsRegisterButton"
+                class="register-button"
+            >
+                Register Now
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         REGISTRATION MODAL
+         ========================================== -->
+
+    <div
+        id="registrationModal"
+        class="modal"
+    >
+
+        <div class="modal-content">
+
+            <button
+                class="close-button"
+                onclick="closeRegistration()"
+            >
+                &times;
+            </button>
+
+
+            <p class="section-tag">
+                EVENT REGISTRATION
+            </p>
+
+
+            <h2 id="registrationEventTitle">
+                Register
+            </h2>
+
+
+            <form id="registrationForm">
+
+                <input
+                    type="hidden"
+                    id="eventId"
+                >
+
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="Enter your phone number"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- TEAM NAME -->
+
+                <div class="form-group">
+
+                    <label for="teamName">
+
+                        Team Name
+
+                        <span class="optional">
+                            (Optional)
+                        </span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="teamName"
+                        name="teamName"
+                        placeholder="Enter team name"
+                    >
+
+                </div>
+
+
+                <!-- NUMBER OF MEMBERS -->
+
+                <div class="form-group">
+
+                    <label for="noOfMembers">
+
+                        Number of Members
+
+                        <span class="optional">
+                            (Optional)
+                        </span>
+
+                    </label>
+
+                    <input
+                        type="number"
+                        id="noOfMembers"
+                        name="noOfMembers"
+                        min="1"
+                        placeholder="e.g. 4"
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    id="registrationButton"
+                    class="register-button"
+                >
+                    Complete Registration
+                </button>
+
+
+                <p
+                    id="registrationMessage"
+                    class="form-message"
+                ></p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         ABOUT
+         ========================================== -->
+
+    <section
+        id="about"
+        class="about-section"
+    >
+
+        <div class="container">
+
+            <p class="section-tag">
+                ABOUT EVENTHUB
+            </p>
+
+            <h2>
+                One place for every experience.
+            </h2>
+
+            <p>
+                EventHub makes it easy to discover,
+                explore and register for exciting
+                events.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         FOOTER
+         ========================================== -->
+
+    <footer>
+
+        <div class="container">
+
+            <p>
+                © 2026 EventHub. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

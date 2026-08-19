@@ -1,0 +1,1269 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f7f8fc;
+    color: #171717;
+    line-height: 1.6;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    height: 72px;
+    padding: 0 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    border-bottom: 1px solid #eeeeee;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: #635bff;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    color: #635bff;
+}
+
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 540px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 20px;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            #e7e4ff,
+            transparent 40%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            #dff7ff,
+            transparent 40%
+        ),
+        #ffffff;
+}
+
+.hero-content {
+    max-width: 850px;
+}
+
+.hero-tag,
+.section-tag {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #635bff;
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    font-size: clamp(45px, 7vw, 78px);
+    line-height: 1.05;
+    letter-spacing: -4px;
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    display: block;
+    color: #635bff;
+}
+
+.hero-description {
+    max-width: 620px;
+    margin: 0 auto 35px;
+    color: #666;
+    font-size: 18px;
+}
+
+.hero-button {
+    display: inline-block;
+    padding: 14px 30px;
+    background: #635bff;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.hero-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(99, 91, 255, 0.25);
+}
+
+
+/* ================= EVENTS ================= */
+
+.events-section {
+    padding: 90px 8%;
+    background: #f7f8fc;
+}
+
+.section-heading {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 50px;
+}
+
+.section-heading h2,
+.about-content h2 {
+    font-size: 42px;
+    letter-spacing: -2px;
+    margin-bottom: 12px;
+}
+
+.section-heading > p:last-child {
+    color: #666;
+}
+
+.events-grid {
+    max-width: 1150px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 25px;
+}
+
+
+/* ================= EVENT CARD ================= */
+
+.event-card {
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 18px;
+    padding: 25px;
+
+    transition: 0.25s;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.04);
+}
+
+.event-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.09);
+}
+
+.event-date {
+    color: #635bff;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.event-card h3 {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+.event-description {
+    color: #666;
+    min-height: 70px;
+    margin-bottom: 18px;
+}
+
+.event-info {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.event-capacity {
+    font-weight: 700;
+    margin: 15px 0;
+}
+
+.register-button {
+    width: 100%;
+    border: none;
+    padding: 13px;
+
+    background: #635bff;
+    color: #ffffff;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    transition: 0.2s;
+}
+
+.register-button:hover {
+    background: #5048dc;
+    transform: translateY(-1px);
+}
+
+.register-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* ================= LOADING ================= */
+
+.loading,
+.no-events {
+    text-align: center;
+    grid-column: 1 / -1;
+
+    color: #666;
+
+    padding: 40px;
+}
+
+
+/* ================= ABOUT ================= */
+
+.about-section {
+    padding: 100px 8%;
+
+    background: #171717;
+
+    color: #ffffff;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: auto;
+
+    text-align: center;
+}
+
+.about-content p:last-child {
+    color: #bbbbbb;
+    font-size: 17px;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+    text-align: center;
+
+    padding: 25px;
+
+    background: #111111;
+
+    color: #888;
+
+    font-size: 14px;
+}
+
+
+/* ================= COMMON MODAL ================= */
+
+.modal {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.65);
+
+    z-index: 1000;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 480px;
+
+    max-height: 90vh;
+    overflow-y: auto;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    padding: 35px;
+
+    position: relative;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.25);
+}
+
+.close-button {
+    position: absolute;
+
+    top: 12px;
+    right: 18px;
+
+    border: none;
+
+    background: none;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    color: #555;
+}
+
+.close-button:hover {
+    color: #000;
+}
+
+
+/* ================= EVENT DETAILS ================= */
+
+.event-details-modal {
+    max-width: 650px;
+}
+
+.event-details-modal h2 {
+    font-size: 36px;
+    line-height: 1.2;
+
+    margin-bottom: 25px;
+
+    padding-right: 30px;
+}
+
+.details-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+.detail-item {
+    display: flex;
+
+    gap: 10px;
+
+    padding: 15px;
+
+    background: #f7f8fc;
+
+    border-radius: 12px;
+}
+
+.detail-item > span {
+    font-size: 22px;
+}
+
+.detail-item strong {
+    font-size: 13px;
+
+    color: #666;
+}
+
+.detail-item p {
+    margin-top: 3px;
+
+    font-weight: 700;
+}
+
+.event-description-box,
+.explore-box {
+    padding: 20px;
+
+    border-radius: 12px;
+
+    background: #f7f8fc;
+
+    margin-bottom: 20px;
+}
+
+.event-description-box h3,
+.explore-box h3 {
+    margin-bottom: 10px;
+}
+
+.event-description-box p {
+    color: #666;
+}
+
+.explore-box ul {
+    padding-left: 20px;
+
+    color: #555;
+}
+
+.explore-box li {
+    margin-bottom: 7px;
+}
+
+
+/* ================= REGISTRATION FORM ================= */
+
+#registrationForm {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+#registrationForm input {
+    width: 100%;
+
+    padding: 14px;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 9px;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+#registrationForm input:focus {
+    border-color: #635bff;
+
+    box-shadow:
+        0 0 0 3px rgba(99, 91, 255, 0.1);
+}
+
+.form-message {
+    margin-top: 15px;
+
+    text-align: center;
+
+    font-weight: 600;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        padding: 0 5%;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .hero {
+        min-height: 450px;
+
+        padding: 60px 20px;
+    }
+
+    .hero h1 {
+        letter-spacing: -2px;
+    }
+
+    .events-section {
+        padding: 70px 5%;
+    }
+
+    .section-heading h2,
+    .about-content h2 {
+        font-size: 34px;
+    }
+
+    .details-list {
+        grid-template-columns: 1fr;
+    }
+
+    .event-details-modal h2 {
+        font-size: 28px;
+    }
+
+    .modal-content {
+        padding: 28px 20px;
+    }
+}
+/* ================= ADMIN ================= */
+
+.admin-container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 70px 5%;
+}
+
+.admin-header {
+    margin-bottom: 40px;
+}
+
+.admin-header h1 {
+    font-size: 44px;
+    letter-spacing: -2px;
+    margin-bottom: 8px;
+}
+
+.admin-header > div > p:last-child {
+    color: #666;
+}
+
+.admin-card {
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 18px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+}
+
+.admin-card h2 {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.admin-subtitle {
+    color: #777;
+    margin-bottom: 25px;
+}
+
+#eventForm {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-group label {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #dddddd;
+    border-radius: 9px;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #635bff;
+    box-shadow: 0 0 0 3px rgba(99, 91, 255, 0.1);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.admin-events-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.refresh-button {
+    border: 1px solid #dddddd;
+    background: #ffffff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.refresh-button:hover {
+    background: #f5f5f5;
+}
+
+.admin-events {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.admin-event-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px;
+    background: #f7f8fc;
+    border-radius: 12px;
+}
+
+.admin-event-item h3 {
+    margin-bottom: 7px;
+}
+
+.admin-event-item p {
+    color: #666;
+    font-size: 14px;
+    margin-top: 3px;
+}
+
+@media (max-width: 700px) {
+
+    .admin-header h1 {
+        font-size: 34px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-card {
+        padding: 22px;
+    }
+
+    .admin-events-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .admin-event-item {
+        flex-direction: column;
+    }
+}
+/* ==========================================
+   ADMIN DASHBOARD
+   ========================================== */
+
+.admin-container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 70px 5%;
+}
+
+.admin-header {
+    margin-bottom: 40px;
+}
+
+.admin-header h1 {
+    font-size: 44px;
+    letter-spacing: -2px;
+    margin-bottom: 8px;
+}
+
+.admin-header > div > p:last-child {
+    color: #666;
+}
+
+.admin-card {
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 18px;
+    padding: 30px;
+    margin-bottom: 30px;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.04);
+}
+
+.admin-card h2 {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.admin-subtitle {
+    color: #777;
+    margin-bottom: 25px;
+}
+
+
+/* ==========================================
+   EVENT FORM
+   ========================================== */
+
+#eventForm {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-group label {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+
+    padding: 14px;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 9px;
+
+    font-size: 15px;
+
+    font-family: inherit;
+
+    outline: none;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #635bff;
+
+    box-shadow:
+        0 0 0 3px rgba(99, 91, 255, 0.1);
+}
+
+.form-row {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 18px;
+}
+
+
+/* ==========================================
+   ADMIN EVENTS HEADER
+   ========================================== */
+
+.admin-events-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+/* ==========================================
+   REFRESH BUTTON
+   ========================================== */
+
+.refresh-button {
+    border: 1px solid #dddddd;
+
+    background: #ffffff;
+
+    padding: 10px 18px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+    transition: 0.2s;
+}
+
+.refresh-button:hover {
+    background: #f5f5f5;
+}
+
+
+/* ==========================================
+   ADMIN EVENT LIST
+   ========================================== */
+
+.admin-events {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.admin-event-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 18px;
+
+    background: #f7f8fc;
+
+    border-radius: 12px;
+
+    border: 1px solid #eeeeee;
+
+    transition: 0.2s;
+}
+
+.admin-event-item:hover {
+    border-color: #d8d5ff;
+
+    transform: translateY(-2px);
+}
+
+.admin-event-info {
+    flex: 1;
+}
+
+.admin-event-item h3 {
+    margin-bottom: 7px;
+
+    font-size: 20px;
+}
+
+.admin-event-item p {
+    color: #666;
+
+    font-size: 14px;
+
+    margin-top: 3px;
+}
+
+
+/* ==========================================
+   DELETE BUTTON
+   ========================================== */
+
+.delete-event-button {
+    flex-shrink: 0;
+
+    border: none;
+
+    background: #ff4d4f;
+
+    color: #ffffff;
+
+    padding: 10px 16px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+    transition: 0.2s;
+}
+
+.delete-event-button:hover {
+    background: #d9363e;
+
+    transform: translateY(-1px);
+}
+
+.delete-event-button:active {
+    transform: scale(0.97);
+}
+
+
+/* ==========================================
+   ADMIN RESPONSIVE
+   ========================================== */
+
+@media (max-width: 700px) {
+
+    .admin-container {
+        padding: 50px 5%;
+    }
+
+    .admin-header h1 {
+        font-size: 34px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-card {
+        padding: 22px;
+    }
+
+    .admin-events-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .admin-event-item {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+    .delete-event-button {
+        width: 100%;
+    }
+}
+/* ==========================================
+   ADMIN LOGIN
+   ========================================== */
+
+.admin-login-page {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            #e7e4ff,
+            transparent 40%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            #dff7ff,
+            transparent 40%
+        ),
+        #f7f8fc;
+}
+
+
+.login-container {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+}
+
+
+.login-card {
+    width: 100%;
+
+    max-width: 430px;
+
+    background: #ffffff;
+
+    padding: 40px;
+
+    border-radius: 20px;
+
+    border: 1px solid #e8e8e8;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.08);
+}
+
+
+.login-logo {
+    font-size: 28px;
+
+    font-weight: 800;
+
+    margin-bottom: 30px;
+}
+
+.login-logo span {
+    color: #635bff;
+}
+
+
+.login-card h1 {
+    font-size: 34px;
+
+    letter-spacing: -1px;
+
+    margin-bottom: 8px;
+}
+
+
+.login-subtitle {
+    color: #777;
+
+    margin-bottom: 28px;
+}
+
+
+.login-card #loginForm {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+.login-card input {
+    width: 100%;
+
+    padding: 14px;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 9px;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+
+.login-card input:focus {
+    border-color: #635bff;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(99, 91, 255, 0.1);
+}
+
+
+.back-home {
+    display: block;
+
+    text-align: center;
+
+    margin-top: 22px;
+
+    color: #635bff;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.back-home:hover {
+    text-decoration: underline;
+}
+
+
+@media (max-width: 500px) {
+
+    .login-card {
+        padding: 28px 22px;
+    }
+
+    .login-card h1 {
+        font-size: 28px;
+    }
+}
+.logout-button {
+    border: none;
+    background: #171717;
+    color: #ffffff;
+    padding: 9px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.logout-button:hover {
+    background: #333333;
+}
+/* ==========================================
+   EDIT EVENT BUTTON
+   ========================================== */
+
+.admin-event-actions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.edit-event-button {
+    border: none;
+
+    background: #635bff;
+
+    color: #ffffff;
+
+    padding: 10px 16px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+    transition: 0.2s;
+}
+
+.edit-event-button:hover {
+    background: #5048dc;
+    transform: translateY(-1px);
+}
+
+
+/* ==========================================
+   EDIT MODAL
+   ========================================== */
+
+#editEventModal .modal-content {
+    max-width: 650px;
+}
+
+
+@media (max-width: 700px) {
+
+    .admin-event-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .edit-event-button,
+    .delete-event-button {
+        width: 100%;
+    }
+}
+.registrations-modal {
+    max-width: 700px;
+}
+
+.registration-summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px;
+    margin: 20px 0;
+    background: #f7f8fc;
+    border-radius: 12px;
+}
+
+.registration-summary strong {
+    font-size: 32px;
+}
+
+.registration-summary span {
+    color: #666;
+    font-weight: 600;
+}
+
+.registrations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 450px;
+    overflow-y: auto;
+}
+
+.registration-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px;
+    background: #f7f8fc;
+    border: 1px solid #eeeeee;
+    border-radius: 12px;
+}
+
+.participant-number {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: #635bff;
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+}
+
+.participant-info {
+    flex: 1;
+}
+
+.participant-info h3 {
+    margin-bottom: 5px;
+}
+
+.participant-info p {
+    color: #666;
+    font-size: 14px;
+    margin-top: 3px;
+}
+
+.participant-info small {
+    display: block;
+    margin-top: 7px;
+    color: #999;
+}
+
+.registrations-button {
+    border: none;
+    background: #171717;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.registrations-button:hover {
+    background: #333;
+}
+.registrations-button {
+    border: none;
+    background: #171717;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+}
