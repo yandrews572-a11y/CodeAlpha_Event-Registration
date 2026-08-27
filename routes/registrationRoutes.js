@@ -38,7 +38,8 @@ router.post("/", async (req, res) => {
 
             return res.status(400).json({
                 success: false,
-                message: "Event, name, email and phone are required"
+                message:
+                    "Event, name, email and phone are required"
             });
 
         }
@@ -62,7 +63,8 @@ router.post("/", async (req, res) => {
         // CHECK EVENT
         // ==========================================
 
-        const existingEvent = await Event.findById(event);
+        const existingEvent =
+            await Event.findById(event);
 
         if (!existingEvent) {
 
@@ -78,7 +80,9 @@ router.post("/", async (req, res) => {
         // CHECK DUPLICATE REGISTRATION
         // ==========================================
 
-        const normalizedEmail = email.trim().toLowerCase();
+        const normalizedEmail =
+            email.trim().toLowerCase();
+
 
         const existingRegistration =
             await Registration.findOne({
@@ -86,11 +90,13 @@ router.post("/", async (req, res) => {
                 email: normalizedEmail
             });
 
+
         if (existingRegistration) {
 
             return res.status(409).json({
                 success: false,
-                message: "You are already registered for this event"
+                message:
+                    "You are already registered for this event"
             });
 
         }
@@ -105,11 +111,16 @@ router.post("/", async (req, res) => {
                 event: event
             });
 
-        if (registrationCount >= existingEvent.capacity) {
+
+        if (
+            existingEvent.capacity &&
+            registrationCount >= existingEvent.capacity
+        ) {
 
             return res.status(409).json({
                 success: false,
-                message: "Event registration is full"
+                message:
+                    "Event registration is full"
             });
 
         }
@@ -120,72 +131,83 @@ router.post("/", async (req, res) => {
         // ==========================================
 
         const registration =
-    await Registration.create({
+            await Registration.create({
 
-        event,
+                event: event,
 
-        name: name.trim(),
+                name: name.trim(),
 
-        email: normalizedEmail,
+                email: normalizedEmail,
 
-        phone: phone.trim(),
+                phone: phone.trim(),
 
-        teamName:
-            teamName
-                ? teamName.trim()
-                : "",
+                teamName:
+                    teamName
+                        ? teamName.trim()
+                        : "",
 
-        noOfMembers:
-            noOfMembers !== undefined &&
-            noOfMembers !== null &&
-            noOfMembers !== ""
-                ? Number(noOfMembers)
-                : null
+                noOfMembers:
+                    noOfMembers !== undefined &&
+                    noOfMembers !== null &&
+                    noOfMembers !== ""
+                        ? Number(noOfMembers)
+                        : null
 
-    });
-
-
-        // ==========================================
-        // SEND CONFIRMATION EMAIL
-        // ==========================================
-
-        try {
-
-            await sendRegistrationEmail(
-                normalizedEmail,
-                name.trim(),
-                existingEvent.title,
-                existingEvent.date,
-                existingEvent.location
-            );
-
-            console.log(
-                "📧 Confirmation email sent to:",
-                normalizedEmail
-            );
-
-        } catch (emailError) {
-
-            console.error(
-                "⚠️ Registration saved but email failed:",
-                emailError.message
-            );
-
-        }
+            });
 
 
         // ==========================================
-        // RESPONSE
+        // SEND RESPONSE IMMEDIATELY
         // ==========================================
+
+        /*
+         * IMPORTANT:
+         *
+         * Email sending is intentionally NOT awaited.
+         *
+         * This means the user gets the successful
+         * registration response immediately instead
+         * of waiting for Gmail SMTP.
+         */
+
 
         res.status(201).json({
 
             success: true,
 
             message:
-                "Registration successful. Confirmation email sent.",
+                "Registration successful",
 
             registration
+
+        });
+
+
+        // ==========================================
+        // SEND CONFIRMATION EMAIL IN BACKGROUND
+        // ==========================================
+
+        sendRegistrationEmail(
+            normalizedEmail,
+            name.trim(),
+            existingEvent.title,
+            existingEvent.date,
+            existingEvent.location
+        )
+        .then(() => {
+
+            console.log(
+                "📧 Confirmation email sent to:",
+                normalizedEmail
+            );
+
+        })
+        .catch((emailError) => {
+
+            console.error(
+                "⚠️ Registration saved but email failed:",
+                emailError.message
+            );
 
         });
 
@@ -197,15 +219,25 @@ router.post("/", async (req, res) => {
             error
         );
 
-        res.status(500).json({
 
-            success: false,
+        // Only send error if response hasn't
+        // already been sent
 
-            message: "Registration failed",
+        if (!res.headersSent) {
 
-            error: error.message
+            return res.status(500).json({
 
-        });
+                success: false,
+
+                message:
+                    "Registration failed",
+
+                error:
+                    error.message
+
+            });
+
+        }
 
     }
 
@@ -236,88 +268,8 @@ router.get("/", async (req, res) => {
 
             success: true,
 
-            count: registrations.length,
-
-            registrations
-
-        });
-
-
-    } catch (error) {
-
-        res.status(500).json({
-
-            success: false,
-
-            message: "Failed to fetch registrations",
-
-            error: error.message
-
-        });
-
-    }
-
-});
-
-// ==========================================
-// GET REGISTRATIONS BY EVENT
-// GET /api/registrations/event/:eventId
-// ==========================================
-
-router.get("/event/:eventId", async (req, res) => {
-
-    try {
-
-        const { eventId } = req.params;
-
-
-        // Validate event ID
-
-        if (!mongoose.Types.ObjectId.isValid(eventId)) {
-
-            return res.status(400).json({
-                success: false,
-                message: "Invalid event ID"
-            });
-
-        }
-
-
-        // Check event
-
-        const existingEvent =
-            await Event.findById(eventId);
-
-        if (!existingEvent) {
-
-            return res.status(404).json({
-                success: false,
-                message: "Event not found"
-            });
-
-        }
-
-
-        // Get registrations
-
-        const registrations =
-            await Registration.find({
-                event: eventId
-            })
-            .populate(
-                "event",
-                "title date location"
-            )
-            .sort({
-                createdAt: -1
-            });
-
-
-        res.status(200).json({
-
-            success: true,
-
-            count: registrations.length,
+            count:
+                registrations.length,
 
             registrations
 
@@ -327,7 +279,7 @@ router.get("/event/:eventId", async (req, res) => {
     } catch (error) {
 
         console.error(
-            "Get Event Registrations Error:",
+            "Get Registrations Error:",
             error.message
         );
 
@@ -337,7 +289,7 @@ router.get("/event/:eventId", async (req, res) => {
             success: false,
 
             message:
-                "Failed to fetch event registrations",
+                "Failed to fetch registrations",
 
             error:
                 error.message
@@ -347,60 +299,220 @@ router.get("/event/:eventId", async (req, res) => {
     }
 
 });
+
+
 // ==========================================
-// GET SINGLE REGISTRATION
-// GET /api/registrations/:id
+// GET REGISTRATIONS BY EVENT
+// GET /api/registrations/event/:eventId
 // ==========================================
 
-router.get("/:id", async (req, res) => {
+router.get(
+    "/event/:eventId",
+    async (req, res) => {
 
-    try {
+        try {
 
-        const registration =
-            await Registration.findById(req.params.id)
-                .populate(
-                    "event",
-                    "title date location"
+            const {
+                eventId
+            } = req.params;
+
+
+            // ==========================================
+            // VALIDATE EVENT ID
+            // ==========================================
+
+            if (
+                !mongoose.Types.ObjectId.isValid(
+                    eventId
+                )
+            ) {
+
+                return res.status(400).json({
+
+                    success: false,
+
+                    message:
+                        "Invalid event ID"
+
+                });
+
+            }
+
+
+            // ==========================================
+            // CHECK EVENT
+            // ==========================================
+
+            const existingEvent =
+                await Event.findById(
+                    eventId
                 );
 
 
-        if (!registration) {
+            if (!existingEvent) {
 
-            return res.status(404).json({
+                return res.status(404).json({
+
+                    success: false,
+
+                    message:
+                        "Event not found"
+
+                });
+
+            }
+
+
+            // ==========================================
+            // GET REGISTRATIONS
+            // ==========================================
+
+            const registrations =
+                await Registration.find({
+                    event: eventId
+                })
+                .populate(
+                    "event",
+                    "title date location"
+                )
+                .sort({
+                    createdAt: -1
+                });
+
+
+            res.status(200).json({
+
+                success: true,
+
+                count:
+                    registrations.length,
+
+                registrations
+
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "Get Event Registrations Error:",
+                error.message
+            );
+
+
+            res.status(500).json({
 
                 success: false,
 
-                message: "Registration not found"
+                message:
+                    "Failed to fetch event registrations",
+
+                error:
+                    error.message
 
             });
 
         }
 
-
-        res.status(200).json({
-
-            success: true,
-
-            registration
-
-        });
+    }
+);
 
 
-    } catch (error) {
+// ==========================================
+// GET SINGLE REGISTRATION
+// GET /api/registrations/:id
+// ==========================================
 
-        res.status(400).json({
+router.get(
+    "/:id",
+    async (req, res) => {
 
-            success: false,
+        try {
 
-            message: "Invalid registration ID",
+            const {
+                id
+            } = req.params;
 
-            error: error.message
 
-        });
+            // ==========================================
+            // VALIDATE REGISTRATION ID
+            // ==========================================
+
+            if (
+                !mongoose.Types.ObjectId.isValid(id)
+            ) {
+
+                return res.status(400).json({
+
+                    success: false,
+
+                    message:
+                        "Invalid registration ID"
+
+                });
+
+            }
+
+
+            // ==========================================
+            // FIND REGISTRATION
+            // ==========================================
+
+            const registration =
+                await Registration.findById(id)
+                    .populate(
+                        "event",
+                        "title date location"
+                    );
+
+
+            if (!registration) {
+
+                return res.status(404).json({
+
+                    success: false,
+
+                    message:
+                        "Registration not found"
+
+                });
+
+            }
+
+
+            res.status(200).json({
+
+                success: true,
+
+                registration
+
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "Get Registration Error:",
+                error.message
+            );
+
+
+            res.status(500).json({
+
+                success: false,
+
+                message:
+                    "Failed to fetch registration",
+
+                error:
+                    error.message
+
+            });
+
+        }
 
     }
-
-});
+);
 
 
 // ==========================================
@@ -408,53 +520,99 @@ router.get("/:id", async (req, res) => {
 // DELETE /api/registrations/:id
 // ==========================================
 
-router.delete("/:id", async (req, res) => {
+router.delete(
+    "/:id",
+    async (req, res) => {
 
-    try {
+        try {
 
-        const registration =
-            await Registration.findByIdAndDelete(
-                req.params.id
+            const {
+                id
+            } = req.params;
+
+
+            // ==========================================
+            // VALIDATE ID
+            // ==========================================
+
+            if (
+                !mongoose.Types.ObjectId.isValid(id)
+            ) {
+
+                return res.status(400).json({
+
+                    success: false,
+
+                    message:
+                        "Invalid registration ID"
+
+                });
+
+            }
+
+
+            // ==========================================
+            // DELETE REGISTRATION
+            // ==========================================
+
+            const registration =
+                await Registration.findByIdAndDelete(
+                    id
+                );
+
+
+            if (!registration) {
+
+                return res.status(404).json({
+
+                    success: false,
+
+                    message:
+                        "Registration not found"
+
+                });
+
+            }
+
+
+            res.status(200).json({
+
+                success: true,
+
+                message:
+                    "Registration cancelled successfully"
+
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "Delete Registration Error:",
+                error.message
             );
 
 
-        if (!registration) {
-
-            return res.status(404).json({
+            res.status(500).json({
 
                 success: false,
 
-                message: "Registration not found"
+                message:
+                    "Failed to cancel registration",
+
+                error:
+                    error.message
 
             });
 
         }
 
-
-        res.status(200).json({
-
-            success: true,
-
-            message: "Registration cancelled successfully"
-
-        });
-
-
-    } catch (error) {
-
-        res.status(400).json({
-
-            success: false,
-
-            message: "Failed to cancel registration",
-
-            error: error.message
-
-        });
-
     }
+);
 
-});
 
+// ==========================================
+// EXPORT ROUTER
+// ==========================================
 
 module.exports = router;
