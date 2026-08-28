@@ -1,23 +1,6 @@
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
-// ==========================================
-// EMAIL TRANSPORTER
-// ==========================================
-
-const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
-
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    },
-
-    tls: {
-        family: 4
-    }
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 
 // ==========================================
@@ -41,11 +24,12 @@ async function sendRegistrationEmail(
         }
     );
 
-    const mailOptions = {
 
-        from: `"EventHub" <${process.env.EMAIL_USER}>`,
+    const { data, error } = await resend.emails.send({
 
-        to: userEmail,
+        from: "EventHub <onboarding@resend.dev>",
+
+        to: [userEmail],
 
         subject: `🎉 Registration Confirmed - ${eventTitle}`,
 
@@ -73,8 +57,7 @@ async function sendRegistrationEmail(
                     </p>
 
                     <p>
-                        Your registration has been successfully
-                        confirmed.
+                        Your registration has been successfully confirmed.
                     </p>
 
                     <hr>
@@ -115,15 +98,22 @@ async function sendRegistrationEmail(
 
             </div>
         `
-    };
+    });
 
-    await transporter.sendMail(mailOptions);
+
+    if (error) {
+        throw new Error(error.message);
+    }
+
+
+    console.log(
+        "📧 Confirmation email sent:",
+        data.id
+    );
+
+    return data;
 }
 
-
-// ==========================================
-// EXPORT
-// ==========================================
 
 module.exports = {
     sendRegistrationEmail
