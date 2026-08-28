@@ -1,16 +1,21 @@
 const nodemailer = require("nodemailer");
 
-
 // ==========================================
 // EMAIL TRANSPORTER
 // ==========================================
 
 const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
 
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
+    },
+
+    tls: {
+        family: 4
     }
 });
 
@@ -35,7 +40,6 @@ async function sendRegistrationEmail(
             year: "numeric"
         }
     );
-
 
     const mailOptions = {
 
@@ -113,10 +117,13 @@ async function sendRegistrationEmail(
         `
     };
 
-
     await transporter.sendMail(mailOptions);
 }
 
+
+// ==========================================
+// EXPORT
+// ==========================================
 
 module.exports = {
     sendRegistrationEmail
