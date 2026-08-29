@@ -61,6 +61,8 @@ A full-stack **Event Registration System** that allows users to discover upcomin
 
 - Nodemailer
 - Gmail SMTP
+- Resend API
+- Registration confirmation emails
 
 ### Deployment
 
