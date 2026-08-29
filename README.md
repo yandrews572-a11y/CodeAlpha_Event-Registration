@@ -1,10 +1,12 @@
 # 🎟️ CodeAlpha Event Registration System
 
-A full-stack event registration platform that allows users to discover upcoming events, explore event details, and register individually or as a team. Administrators can securely manage events and view registered participants.
+A full-stack **Event Registration System** that allows users to discover upcoming events, explore event details, and register easily. Administrators can securely manage events and view registered participants.
 
 ## 🚀 Live Demo
 
-https://codealpha-event-registration-oq5z.onrender.com
+👉 https://codealpha-event-registration-qq5z.onrender.com
+
+---
 
 ## ✨ Features
 
@@ -13,8 +15,8 @@ https://codealpha-event-registration-oq5z.onrender.com
 - View upcoming events
 - Explore detailed event information
 - Register for events
-- Team Name — Optional
-- Number of Members — Optional
+- Team name – Optional
+- Number of members – Optional
 - Duplicate registration prevention
 - Event capacity validation
 - Registration confirmation email
@@ -31,31 +33,41 @@ https://codealpha-event-registration-oq5z.onrender.com
 - View team name and number of members
 - Admin logout
 
+---
+
 ## 🛠️ Tech Stack
 
 ### Frontend
-- HTML
-- CSS
+
+- HTML5
+- CSS3
 - JavaScript
 
 ### Backend
+
 - Node.js
 - Express.js
 
 ### Database
+
 - MongoDB
 - Mongoose
 
 ### Authentication
+
 - JSON Web Token (JWT)
 
-### Email
+### Email Service
+
 - Nodemailer
-- Gmail App Password
+- Gmail SMTP
 
 ### Deployment
+
 - Render
 - GitHub
+
+---
 
 ## 📁 Project Structure
 
@@ -89,4 +101,5 @@ CodeAlpha_Event-Registration/
 ├── .gitignore
 ├── package.json
 ├── package-lock.json
-└── server.js
+├── server.js
+└── README.md
